@@ -5,6 +5,6 @@
 * Pagination
 * No jquery needed.
 * Using a regular script tag. no build tools used.
-* dependencies - bootstrap.css, vue.js 2
+* dependencies - bootstrap.css, vue.js 2 and lodash
 
 ENJOY :-)
