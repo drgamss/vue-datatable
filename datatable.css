@@ -45,7 +45,7 @@ a.disabled {
   pointer-events: none; 
 } 
 a.active-pagination {
-  background: #cce3f7;  
+  background: #cce3f7 !important;  
 }
 
 .no-results {
