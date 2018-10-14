@@ -1,5 +1,5 @@
 
-* Dynamic datatable with sorting, search and pagination.
+* Dynamic datatable built with vue.js 2
 * Search by category functionality.
 * Sort by column.
 * Pagination
