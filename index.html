@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Vue JS Contact Form" content="">
+    <meta name="Dani_Gamss" content="">
+
+    <title>Vue JS Contact Form</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- vue photo gallery styles-->
+    <link rel="stylesheet" type="text/css" href="datatable.css" />
+
+
+</head>
+
+<body>    
+
+    <div id="master-container">
+      <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Data Table</h2>  
+            </div> 
+          </div>  
+          <div class='row'>     
+            <div class="col-md-8 filter-container">
+              <label for="currentSearchCategory">Select search category:</label>
+              <select v-model="currentSearchCategory" @change="restoreArray" id="currentSearchCategory">
+                <option disabled value="">Select category</option>
+                <option v-for="(item, index) in dataProperties" :key="index">{{ item }}</option>
+              </select>
+              <input type="text" v-model='searchChars' placeholder='Search by name' @keyup='filterArrayBySearch'>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">        
+              <table class='table table-striped'>
+                <tbody>
+                  <tr>
+                    <th @click="sort('Name')">Name</th>
+                    <th @click="sort('Gender')">Gender</th>
+                    <th @click="sort('Address')">Address</th>
+                    <th @click="sort('Email')">Email</th>
+                    <th @click="sort('Department')">Department</th> 
+                  </tr> 
+                  <tr v-for="(item, index) in dataTableArrays[currentActiveIndex]" :key="index">
+                    <td>{{item.Name}}</td> 
+                    <td>{{item.Gender}}</td> 
+                    <td>{{item.Address}}</td> 
+                    <td>{{item.Email}}</td> 
+                    <td>{{item.Department}}</td>  
+                  </tr> 
+                </tbody>        
+              </table>
+            </div>
+          </div>                
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ls-table-pagination" v-show="dataTableArrays.length > 1">
+              <ul class="pagination ls-pagination">
+
+                <li>
+                  <a @click="moveOnePage('back')" :class="{'disabled': currentActiveIndex === 0}">
+                    <i class="fa fa-arrow-left"></i> 
+                  </a>
+                </li>
+
+                <li v-for="(i, index) in dataTableArrays.length" :key="index">
+                  <a :class="{'active-pagination': currentActiveIndex === i - 1}" @click="activatePage(i - 1)">{{ i }}</a>
+                </li>
+
+                <li>
+                  <a @click="moveOnePage('forward')" :class="{'disabled': (currentActiveIndex + 1) === dataTableArrays.length}">
+                    <i class="fa fa-arrow-right"></i>
+                  </a>
+                </li>
+
+              </ul>
+            </div>       
+          </div>
+        </div>
+        <div class="row" v-show="currentFullArray.length === 0">
+          <div class="col-md-12">
+            <p class='no-results'>No results under current filter.</p>          
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- vue core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <!-- vue photo gallery -->
+    <script src="data.js"></script>
+    <script src="datatable.js"></script>
+
+</body>
+
+</html>
